@@ -77,7 +77,7 @@ func constructJobForClusterScan(clusterScan *scanv1.ClusterScan) *kbatch.Job {
 					Containers: []corev1.Container{
 						{
 							Name:    "terrascan",
-							Image:   "accurics/terrascan", // Make sure to use the correct image
+							Image:   "foo/terrascan", //TODO: real image
 							Command: []string{"terrascan", "scan", "-i", "kubernetes", "-d", "/configs", "--output", "json"},
 						},
 					},
@@ -127,7 +127,7 @@ func constructCronJobForClusterScan(clusterScan *scanv1.ClusterScan) *kbatch.Cro
 							Containers: []corev1.Container{
 								{
 									Name:    "terrascan",
-									Image:   "accurics/terrascan",
+									Image:   "foo/terrascan", //TODO: real image
 									Command: []string{"terrascan", "scan", "-i", "kubernetes", "-d", "/configs", "--output", "json"},
 								},
 							},
