@@ -1,11 +1,50 @@
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  labels:
-    app.kubernetes.io/name: clusterscancontroller
-    app.kubernetes.io/managed-by: kustomize
   name: manager-role
 rules:
-- apiGroups: [""]
-  resources: ["pods"]
-  verbs: ["get", "list", "watch"]
+- apiGroups:
+  - scan
+  resources:
+  - jobs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - scan
+  resources:
+  - jobs/status
+  verbs:
+  - get
+- apiGroups:
+  - scan.clusterscan.io.clusterscan.io
+  resources:
+  - clusterscans
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - scan.clusterscan.io.clusterscan.io
+  resources:
+  - clusterscans/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - scan.clusterscan.io.clusterscan.io
+  resources:
+  - clusterscans/status
+  verbs:
+  - get
+  - patch
+  - update

@@ -1,0 +1,9 @@
+apiVersion: scan.clusterscan.io.clusterscan.io/v1
+kind: ClusterScan
+metadata:
+  name: example-clusterscan
+  namespace: default
+spec:
+  scanType: terrascan
+  schedule: "0 */6 * * *"
+  scanFrequency: Recurring

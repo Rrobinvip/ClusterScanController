@@ -158,6 +158,7 @@ func (r *ClusterScanReconciler) updateClusterScanStatus(ctx context.Context, clu
 
 func (r *ClusterScanReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	logger := log.FromContext(ctx)
+	logger.Info("Hello")
 
 	// Fetch the ClusterScan instanec
 	var clusterScan scanv1.ClusterScan
@@ -170,8 +171,10 @@ func (r *ClusterScanReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 	switch clusterScan.Spec.ScanFrequencyPolicy {
 	case scanv1.OneOff:
 		err = r.createOrUpdateJob(ctx, &clusterScan)
+		logger.Info("Oneoff")
 	case scanv1.Recurring:
 		err = r.createOrUpdateCronJob(ctx, &clusterScan)
+		logger.Info("Recurring")
 	default:
 		logger.Error(err, "Invalid ScanFrequencyPolicy", "Policy", clusterScan.Spec.ScanFrequencyPolicy)
 		return ctrl.Result{}, err
